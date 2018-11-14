@@ -18,14 +18,17 @@ for entry in entries:
     with open('./entries/' + entry) as f:
         words = f.read()
     words = words.split()
-    nd_array = np.empty((0,100), int)
-    for w in words:
+    nd_array = np.zeros((max_height, 100), dtype=np.float)
+    for i, w in enumerate(words):
         old_val = model[w]
         new_val = (new_max - new_min) * (old_val - old_min) / (old_max - old_min) + new_min
-        nd_array = np.append(nd_array, np.array([new_val]), axis=0)
-    while nd_array.shape[0] < max_height:
-        nd_array = np.append(nd_array, 0)
-    print(nd_array)
+#        nd_array.append(new_val)
+        nd_array[i] = new_val
+#    while len(nd_array) < max_height:
+#        nd_array.append([0] * 100)
+#        nd_array = np.append(nd_array, 0)
+#    nd_array = np.array(nd_array, dtype=np.float)
+    print(nd_array.shape)
     np.save('./arrays/'+ entry , nd_array)
 # # for v in vocab:
 # #     nd_array = model[v]

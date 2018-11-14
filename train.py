@@ -12,6 +12,10 @@ for array in arrays:
     arrays_list.append(a)
 arrays_list = np.array(arrays_list)
 
+print(arrays_list.shape)
+print(arrays_list[0].shape)
+quit()
+
 with open("masuda.pickle","rb") as f:
     masuda_dict = pickle.load(f)
 

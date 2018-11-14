@@ -22,10 +22,9 @@ class MySubNet(Chain):
 
 class MyNet(Chain):
     def __init__(self):
-        img_channels = 1
         super().__init__()
         with self.init_scope():
-            self.subNet = MySubNet(img_channels, C.CONV1_OUT_CHANNELS, C.CONV_SIZE, C.CONV2_OUT_CHANNELS, C.CONV_SIZE)
+            self.subNet = MySubNet(1, C.CONV1_OUT_CHANNELS, C.CONV_SIZE, C.CONV2_OUT_CHANNELS, C.CONV_SIZE)
             self.fullLayer1 = L.Linear(C.NUM_HIDDEN_NEURONS1, C.NUM_HIDDEN_NEURONS2)
             self.fullLayer2 = L.Linear(C.NUM_HIDDEN_NEURONS2, C.NUM_CLASSES)
 
