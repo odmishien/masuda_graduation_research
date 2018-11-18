@@ -4,17 +4,21 @@ from config import Config
 from MyNet import MyNet
 import pickle
 import os
+import re
 
 arrays = os.listdir('./arrays')
+arrays_2 = [(re.search("[0-9]+", x).group(), x) for x in arrays]
+arrays_2.sort(key=lambda x:(int(x[0])))
+arrays = [x[1] for x in arrays_2]
+
 arrays_list = []
 for array in arrays:
-    a = np.load("./arrays/" + array)
-    arrays_list.append(a)
+    with np.load("./arrays/" + array) as a:
+        dat = np.array(a["arr_0"])
+        dat = dat.reshape((1, Config.MAX_WORDS_IN_TXT, Config.WORD_VEC_SIZE))
+        arrays_list.append(dat)
 arrays_list = np.array(arrays_list)
-
-print(arrays_list.shape)
-print(arrays_list[0].shape)
-quit()
+print("text_making done.")
 
 with open("masuda.pickle","rb") as f:
     masuda_dict = pickle.load(f)
@@ -32,11 +36,13 @@ for entry in entries:
         bookmarks.append(0)
 bookmarks = np.array(bookmarks)
 
+print("bookmarks_making done.")
+
 model = MyNet()
 optimizer = optimizers.Adam()
 optimizer.setup(model)
 
-#GPU設定
+# GPU設定
 # gpu_device = 0
 # cuda.get_device(gpu_device).use()
 # model.to_gpu(gpu_device)
@@ -51,7 +57,6 @@ for epoch in range(1000):
         y_sample = bookmarks[perm[i:(i + bs) if(i + bs < num_train) else num_train]]
         model.zerograds()
         loss = model.train(x_sample, y_sample)
-        print(loss)
         loss.backward()
         loss.unchain_backward()
         optimizer.update()
