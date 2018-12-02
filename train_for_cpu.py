@@ -1,5 +1,6 @@
 import numpy as np
 from chainer import optimizers, serializers, cuda, training, iterators
+from chainer.training import extensions
 from config import Config
 from MyNet import MyNet
 from PIL import Image
@@ -7,7 +8,7 @@ import pickle
 import os
 import re
 
-xp = cuda.cupy
+xp = np
 
 images = os.listdir('./resized_images')
 arrays_2 = [(re.search("[0-9]+", x).group(), x) for x in images]
@@ -16,10 +17,10 @@ images = [x[1] for x in arrays_2]
 
 arrays_list = []
 for image in images:
-    img = cuda.cupy.array(Image.open('./resized_images/' + image),dtype="float32")
+    img = np.array(Image.open('./resized_images/' + image),dtype="float32")
     dat = img.reshape((1, Config.MAX_WORDS_IN_TXT, Config.WORD_VEC_SIZE))
     arrays_list.append(dat)
-arrays_list = cuda.cupy.array(arrays_list)
+arrays_list = np.array(arrays_list)
 print("text_making done.")
 
 with open("masuda.pickle","rb") as f:
@@ -33,16 +34,16 @@ for entry in entries:
     entry = entry.replace('\n','')
     try:
         bookmark = masuda_dict[entry]
-        bookmark = cuda.cupy.array([bookmark],dtype="float32")
+        bookmark = np.array([bookmark],dtype="float32")
         bookmarks.append(bookmark)
     except:
-        bookmarks.append(cuda.cupy.array([0],dtype="float32"))
-bookmarks = cuda.cupy.array(bookmarks,dtype="float32")
+        bookmarks.append(np.array([0],dtype="float32"))
+bookmarks = np.array(bookmarks,dtype="float32")
 print("bookmarks_making done.")
 
 # make tuple data list
 data = []
-for i in len(arrays_list):
+for i in range(len(arrays_list)):
     data.append((arrays_list[i], bookmarks[i]))
 
 # make iterator
@@ -59,7 +60,6 @@ optimizer.setup(model)
 
 updater = training.StandardUpdater(train_iter, optimizer)
 trainer = training.Trainer(updater, (20, 'epoch'), out='result')
-trainer.extend(extensions.Evaluator(test_iter, model, device=-1))
 trainer.extend(extensions.LogReport())
 trainer.extend(extensions.PrintReport( ["epoch", "main/loss", "validation/main/loss", "main/accuracy", "validation/main/accuracy", "elapsed_time"])) # エポック、学習損失、テスト損失、学習正解率、テスト正解率、経過時間
 trainer.extend(extensions.ProgressBar()) # プログレスバー出力
@@ -68,7 +68,7 @@ trainer.run()
 # for epoch in range(1000):
 #     accum_loss = None
 #     bs = Config.BATCH_SIZE
-#     perm = cuda.cupy.random.permutation(num_train)
+#     perm = np.random.permutation(num_train)
 #     for i in range(0, num_train, bs):
 #         x_sample = arrays_list[perm[i:(i + bs) if(i + bs < num_train) else num_train]]
 #         y_sample = bookmarks[perm[i:(i + bs) if(i + bs < num_train) else num_train]]

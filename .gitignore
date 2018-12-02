@@ -3,3 +3,4 @@ entries/
 models/
 __pycache__/
 .vscode/
+*.JPEG
