@@ -1,5 +1,5 @@
 import sys
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 from sklearn.manifold import TSNE
 import numpy as np
 from gensim.models import word2vec
@@ -8,7 +8,7 @@ word2vec_model = word2vec.Word2Vec.load(sys.argv[1])
 
 #取り出す単語の範囲を指定
 skip=0
-limit=200 #よく出る241単語のみをプロットする
+limit=200 #よく出る200単語のみをプロットする
 
 #word2vecの結果をt-SNEで次元圧縮
 vocab = word2vec_model.wv.vocab
@@ -19,12 +19,12 @@ print('fitting.')
 
 model = TSNE(n_components=2, random_state=0)
 np.set_printoptions(suppress=True)
-model.fit_transform(X) 
+model.fit_transform(X)
 
 print('plotting.')
 
 #matplotlibでt-SNEの図を描く
-plt.rcParams['font.family'] = 'YuGo-Medium'
+plt.rcParams['font.family'] = 'AppleGothic'
 plt.rcParams["font.size"] =12
 plt.figure(figsize=(40,40))#図のサイズ
 plt.scatter(model.embedding_[skip:limit, 0], model.embedding_[skip:limit, 1])

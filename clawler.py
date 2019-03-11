@@ -5,6 +5,7 @@ from time import sleep
 from tqdm import tqdm
 
 dic = {}
+clawl_zero_bookmark = False
 
 def clawl (url):
     soup = BeautifulSoup(url,'html.parser')
@@ -32,14 +33,17 @@ def clawl (url):
                 bookmark_num = int(bookmark_page.find('span','entry-info-users').find('span').get_text())
         except:
             bookmark_num = 0
+        if not clawl_zero_bookmark and bookmark_num == 0:
+            pass
+        else:
+            text = p.get_text()
+            dic[text] = bookmark_num
 
-        text = p.get_text()
-        dic[text] = bookmark_num
-
-for page in tqdm(range(200,1200)):
+for page in tqdm(range(2,3000)):
     url = urlopen('https://anond.hatelabo.jp/?mode=top&page='+str(page))
-    sleep(2)
+    sleep(1)
     clawl(url)
-with open ('masuda.pickle','wb')  as f:
+with open ('./pickle/masuda_hotentry','wb')  as f:
     pickle.dump(dic, f)
 print(dic)
+print("done.")

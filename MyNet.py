@@ -28,11 +28,15 @@ class MyNet(Chain):
             self.fullLayer1 = L.Linear(C.NUM_HIDDEN_NEURONS1, C.NUM_HIDDEN_NEURONS2)
             self.fullLayer2 = L.Linear(C.NUM_HIDDEN_NEURONS2, C.NUM_CLASSES)
 
-    def train(self, x, y_hat):
-        y = self.forward(x)
-        return F.mean_squared_error(y, y_hat)
+#    def train(self, x, y_hat):
+#        y = self.forward(x)
+#        return F.mean_squared_error(y, y_hat)
 
-    def forward(self, x):
+    def __call__(self, x, y_hat = None):
         h = self.subNet.forward(x)
         h = F.dropout(F.relu(self.fullLayer1(h)))
-        return self.fullLayer2(h)
+        y = self.fullLayer2(h)
+        if y_hat is None:
+            return y
+        else:
+            return F.mean_squared_error(y, y_hat)

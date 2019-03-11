@@ -1,0 +1,1 @@
+return   itemList . stream (). filter ( Item :: isChecked ). Collect ( Collectors . toList ()) 

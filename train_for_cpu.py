@@ -1,6 +1,9 @@
 import numpy as np
-from chainer import optimizers, serializers, cuda, training, iterators
+from chainer import optimizers, serializers, training, iterators
+from chainer.backends import cuda
 from chainer.training import extensions
+import chainer.links as L
+import chainer.functions as F
 from config import Config
 from MyNet import MyNet
 from PIL import Image
@@ -8,7 +11,7 @@ import pickle
 import os
 import re
 
-xp = np
+GPUID = -1
 
 images = os.listdir('./resized_images')
 arrays_2 = [(re.search("[0-9]+", x).group(), x) for x in images]
@@ -41,24 +44,29 @@ for entry in entries:
 bookmarks = np.array(bookmarks,dtype="float32")
 print("bookmarks_making done.")
 
-# make tuple data list
-data = []
-for i in range(len(arrays_list)):
-    data.append((arrays_list[i], bookmarks[i]))
-
-# make iterator
-train_iter = iterators.SerialIterator(data, Config.BATCH_SIZE)
-
 # make optimizer
 model = MyNet()
 optimizer = optimizers.Adam()
 optimizer.setup(model)
 
-# gpu_device = 0
-# cuda.get_device(gpu_device).use()
-# model.to_gpu(gpu_device)
+"""
+if 0 <= GPUID:
+    cuda.get_device(GPUID).use()
+    model.to_gpu(GPUID)
+    arrays_list = cuda.to_gpu(arrays_list)
+    bookmarks = cuda.to_gpu(bookmarks)
+"""
 
-updater = training.StandardUpdater(train_iter, optimizer)
+# make tuple data list
+data = []
+for i in range(len(arrays_list)):
+    t = (arrays_list[i], bookmarks[i])
+    data.append(t)
+# make iterator
+train_iter = iterators.SerialIterator(data, Config.BATCH_SIZE)
+
+
+updater = training.StandardUpdater(train_iter, optimizer, device = GPUID)
 trainer = training.Trainer(updater, (20, 'epoch'), out='result')
 trainer.extend(extensions.LogReport())
 trainer.extend(extensions.PrintReport( ["epoch", "main/loss", "validation/main/loss", "main/accuracy", "validation/main/accuracy", "elapsed_time"])) # エポック、学習損失、テスト損失、学習正解率、テスト正解率、経過時間

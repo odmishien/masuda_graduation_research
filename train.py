@@ -1,5 +1,8 @@
-import numpy as np
+# import numpy as cuda.cupy
 from chainer import optimizers, serializers, cuda, training, iterators
+from chainer.training import extensions
+import chainer.links as L
+import chainer.functions as F
 from config import Config
 from MyNet import MyNet
 from PIL import Image
@@ -42,24 +45,24 @@ print("bookmarks_making done.")
 
 # make tuple data list
 data = []
-for i in len(arrays_list):
-    data.append((arrays_list[i], bookmarks[i]))
-
+for i in range(len(arrays_list)):
+    t = (arrays_list[i], bookmarks[i])
+    data.append(t)
+print(data.size)
 # make iterator
 train_iter = iterators.SerialIterator(data, Config.BATCH_SIZE)
 
 # make optimizer
-model = MyNet()
+model = L.Classifier(MyNet(),lossfun=F.mean_squared_error)
 optimizer = optimizers.Adam()
 optimizer.setup(model)
 
-# gpu_device = 0
-# cuda.get_device(gpu_device).use()
-# model.to_gpu(gpu_device)
+gpu_device = 0
+cuda.get_device(gpu_device).use()
+model.to_gpu(gpu_device)
 
 updater = training.StandardUpdater(train_iter, optimizer)
 trainer = training.Trainer(updater, (20, 'epoch'), out='result')
-trainer.extend(extensions.Evaluator(test_iter, model, device=-1))
 trainer.extend(extensions.LogReport())
 trainer.extend(extensions.PrintReport( ["epoch", "main/loss", "validation/main/loss", "main/accuracy", "validation/main/accuracy", "elapsed_time"])) # エポック、学習損失、テスト損失、学習正解率、テスト正解率、経過時間
 trainer.extend(extensions.ProgressBar()) # プログレスバー出力
@@ -83,7 +86,7 @@ trainer.run()
 #     print(epoch, accum_loss.data,flush=True)
 #     if epoch % 100 == 0:
 #         outfile = "models/mynet_{}.model".format(epoch)
-#         serializers.save_npz(outfile, model)
+#         serializers.save_cuda.cupyz(outfile, model)
 
 outfile = "models/mynet_final.model"
 serializers.save_npz(outfile, model)
