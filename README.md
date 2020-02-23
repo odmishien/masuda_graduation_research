@@ -1,2 +1,0 @@
-# masuda_graduation_research
-graduation_research
