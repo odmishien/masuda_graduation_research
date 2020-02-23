@@ -6,6 +6,9 @@ authors = ["odmishien <tmtm.yagi.007@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+beautifulsoup4 = "^4.8.2"
+janome = "^0.3.10"
+scikit-learn = "^0.22.1"
 
 [tool.poetry.dev-dependencies]
 
