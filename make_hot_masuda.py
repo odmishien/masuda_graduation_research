@@ -2,11 +2,13 @@ import json
 import re
 import os
 
+
 def format_text(text):
-    text = re.sub(r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', "", text) #URL文字列
-    text=re.sub(r'[!-~]', "", text)#半角記号,数字,英字
-    text = re.sub(r'[︰-＠]', "", text)  #全角記号
+    text = re.sub(r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', "", text)  # URL文字列
+    text = re.sub(r'[!-~]', "", text)  # 半角記号,数字,英字
+    text = re.sub(r'[︰-＠]', "", text)  # 全角記号
     return text
+
 
 def get_hot_entry(filename):
     hot_entries = []
@@ -19,9 +21,10 @@ def get_hot_entry(filename):
                 hot_entries.append(masuda)
     return hot_entries
 
+
 if __name__ == "__main__":
     hot_entries = []
-    for page in range(2,30000):
+    for page in range(2, 100):
         hot_entry = get_hot_entry("data/masuda_{page}.json".format(page=page))
         hot_entries.extend(hot_entry)
     with open('./data/hot_masuda.json', 'w') as f:

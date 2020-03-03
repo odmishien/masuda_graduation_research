@@ -4,15 +4,17 @@ import pickle
 import requests
 from time import sleep
 import json
+import re
 import sys
 
 clawl_zero_bookmark = True
+
 
 def get_masuda_list(url):
     masuda_list = []
     res = requests.get(url)
     soup = BeautifulSoup(res.text, 'html.parser')
-    
+
     sections = soup.find_all('div', 'section')
     for section in sections:
         h3 = section.find('h3')
@@ -49,9 +51,10 @@ def get_masuda_list(url):
         else:
             title = h3.get_text().lstrip("■")
             text = p.get_text()
-            text = re.sub(r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', "", text) #URL文字列
-            text=re.sub(r'[!-~]', "", text)#半角記号,数字,英字
-            text=re.sub(r'[︰-＠]', "", text)#全角記号
+            text = re.sub(
+                r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', "", text)  # URL文字列
+            text = re.sub(r'[!-~]', "", text)  # 半角記号,数字,英字
+            text = re.sub(r'[︰-＠]', "", text)  # 全角記号
             masuda_id = entry_url.lstrip("/")
             masuda = {}
             masuda["title"] = title
@@ -61,9 +64,11 @@ def get_masuda_list(url):
             masuda_list.append(masuda)
     return masuda_list
 
+
 def dump_list_to_json(list, page):
     with open('./data/masuda_{page}.json'.format(page=page), 'w') as f:
         json.dump(masuda_list, f, indent=2, ensure_ascii=False)
+
 
 args = sys.argv
 page_from = int(args[1])
