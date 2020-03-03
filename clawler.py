@@ -49,6 +49,9 @@ def get_masuda_list(url):
         else:
             title = h3.get_text().lstrip("■")
             text = p.get_text()
+            text = re.sub(r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', "", text) #URL文字列
+            text=re.sub(r'[!-~]', "", text)#半角記号,数字,英字
+            text=re.sub(r'[︰-＠]', "", text)#全角記号
             masuda_id = entry_url.lstrip("/")
             masuda = {}
             masuda["title"] = title
