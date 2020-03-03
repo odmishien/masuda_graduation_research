@@ -4,18 +4,23 @@ import pickle
 import requests
 from time import sleep
 import json
+import sys
 
-masuda_list = []
 clawl_zero_bookmark = True
 
-
-def clawl(url):
+def get_masuda_list(url):
+    masuda_list = []
     res = requests.get(url)
     soup = BeautifulSoup(res.text, 'html.parser')
-    # print(soup.prettify())
+    
     sections = soup.find_all('div', 'section')
     for section in sections:
-        entry_url = section.find('a').get('href')
+        h3 = section.find('h3')
+        keywords = h3.find_all('a', class_="keyword")
+        for k in keywords:
+            k.unwrap()
+
+        entry_url = h3.find('a').get('href')
         p = section.find('p')
         try:
             p.find('p', 'share-button').extract()
@@ -42,17 +47,25 @@ def clawl(url):
         if not clawl_zero_bookmark and bookmark_num == 0:
             pass
         else:
+            title = h3.get_text().lstrip("■")
             text = p.get_text()
+            masuda_id = entry_url.lstrip("/")
             masuda = {}
-            masuda["id"] = entry_url
+            masuda["title"] = title
+            masuda["id"] = masuda_id
             masuda["text"] = text
             masuda["bookmark"] = bookmark_num
             masuda_list.append(masuda)
+    return masuda_list
 
+def dump_list_to_json(list, page):
+    with open('./data/masuda_{page}.json'.format(page=page), 'w') as f:
+        json.dump(masuda_list, f, indent=2, ensure_ascii=False)
 
-masuda_id = 1
-for page in range(2, 1000):
+args = sys.argv
+page_from = int(args[1])
+page_to = int(args[2])
+for page in range(page_from, page_to, -1):
     url = 'https://anond.hatelabo.jp/?mode=top&page=' + str(page)
-    clawl(url)
-with open('./data/masuda.json', 'w') as f:
-    json.dump(masuda_list, f, indent=2, ensure_ascii=False)
+    masuda_list = get_masuda_list(url)
+    dump_list_to_json(masuda_list, page)
