@@ -25,9 +25,7 @@ for i in range(2, 100):
 
 vectorizer = TfidfVectorizer(max_df=0.9)
 tfidfs = vectorizer.fit_transform(corpus)
-
-# print('feature_names:', vectorizer.get_feature_names())
-
+print(vectorizer.get_feature_names())
 cs = cosine_similarity(tfidfs.toarray(), tfidfs.toarray())
 ics = numpy.argsort(-cs)
 

@@ -24,7 +24,7 @@ def get_hot_entry(filename):
 
 if __name__ == "__main__":
     hot_entries = []
-    for page in range(2, 100):
+    for page in range(2, 5000):
         hot_entry = get_hot_entry("data/masuda_{page}.json".format(page=page))
         hot_entries.extend(hot_entry)
     with open('./data/hot_masuda.json', 'w') as f:
