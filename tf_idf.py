@@ -5,8 +5,7 @@ import json
 import MeCab
 
 mecab = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
-wakati_masudas = []
-
+masudas = []
 
 corpus = []
 for i in range(2, 100):
@@ -21,26 +20,25 @@ for i in range(2, 100):
             if pos == "名詞":
                 words += node.surface + " "
             node = node.next
-        wakati_masuda["id"] = masuda["id"]
-        wakati_masuda["words"] = words
-        corpus.append(wakati_masuda["words"])
+        corpus.append(words)
+        masudas.append(masuda)
 
 vectorizer = TfidfVectorizer(max_df=0.9)
 tfidfs = vectorizer.fit_transform(corpus)
 
 # print('feature_names:', vectorizer.get_feature_names())
 
-words = vectorizer.get_feature_names()
-for doc_id, vec in zip(range(len(corpus)), tfidfs.toarray()):
-    for w_id, tfidf in sorted(enumerate(vec), key=lambda x: x[1], reverse=True):
-        lemma = words[w_id]
-        # print('\t{0:s}: {1:f}'.format(lemma, tfidf))
-
 cs = cosine_similarity(tfidfs.toarray(), tfidfs.toarray())
-ics = numpy.argsort(cs)
-print(ics)
+ics = numpy.argsort(-cs)
+
 for i, j in enumerate(ics):
-    print("似ている文章A:")
-    print(corpus[j[1]])
-    print("似ている文章B:")
-    print(corpus[i])
+    top_similar_id = j[1]
+    if cs[i][top_similar_id] > 0.7 and masudas[top_similar_id]["id"] != masudas[i]["id"]:
+        print("id:{0}, ブクマ:{1}".format(
+            masudas[top_similar_id]["id"], masudas[top_similar_id]["bookmark"]))
+        print(masudas[top_similar_id]["text"])
+        print("id:{0}, ブクマ:{1}".format(
+            masudas[i]["id"], masudas[i]["bookmark"]))
+        print(masudas[i]["text"])
+        print("類似度: {0}".format(cs[i][top_similar_id]))
+        print("-------------------------------------------")
