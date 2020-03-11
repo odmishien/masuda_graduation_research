@@ -47,10 +47,11 @@ for i, hc in enumerate(hot_corpus):
     cs = cosine_similarity(hc_vector.toarray(), tfidfs.toarray())
     ics = numpy.argsort(-cs)
     top_3_similar_index = ics[0, 1:4]
+    print("\n")
     print("id:{0}, ブクマ:{1}".format(
         hot_masudas[i]["id"], hot_masudas[i]["bookmark"]))
     print(hot_masudas[i]["text"])
-    print("-------------------------------------------")
+    print("\n")
     print("👑似てるエントリランキング👑")
     for rank, j in enumerate(top_3_similar_index):
         print("第{0}位".format(rank + 1))
