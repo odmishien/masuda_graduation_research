@@ -1,8 +1,6 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
-import pickle
 import requests
-from time import sleep
 import json
 import re
 import sys
@@ -51,22 +49,23 @@ def get_masuda_list(url):
         else:
             title = h3.get_text().lstrip("■")
             text = p.get_text()
-            text = re.sub(
-                r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', "", text)  # URL文字列
-            text = re.sub(r'[!-~]', "", text)  # 半角記号,数字,英字
-            text = re.sub(r'[︰-＠]', "", text)  # 全角記号
+            # text = re.sub(
+            #     r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', "", text)  # URL文字列
+            # text = re.sub(r'[!-~]', "", text)  # 半角記号,数字,英字
+            # text = re.sub(r'[︰-＠]', "", text)  # 全角記号
             masuda_id = entry_url.lstrip("/")
             masuda = {}
+            masuda["masuda_id"] = masuda_id
             masuda["title"] = title
-            masuda["id"] = masuda_id
-            masuda["text"] = text
-            masuda["bookmark"] = bookmark_num
+            masuda["content"] = text
+            masuda["bookmark_count"] = bookmark_num
+            masuda["category"] = None
             masuda_list.append(masuda)
     return masuda_list
 
 
 def dump_list_to_json(list, page):
-    with open('./data/masuda_{page}.json'.format(page=page), 'w') as f:
+    with open('./data/entry/masuda_{page}.json'.format(page=page), 'w') as f:
         json.dump(masuda_list, f, indent=2, ensure_ascii=False)
 
 
