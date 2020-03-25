@@ -1,0 +1,177 @@
+[
+  {
+    "masuda_id": "20200221223335",
+    "title": "anond:20200221223212",
+    "content": "それそもそも安定しているとは言わないのでは",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221223326",
+    "title": "anond:20200221222837",
+    "content": "追記: Merge(,)とかしていくと型がどんどんネストしていくからeraseToAnyPublisher()する場面は多いよね",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221223311",
+    "title": "anond:20200221223155",
+    "content": "ワイはなるべく意地悪な言葉は使いたくないんや。煽りも自主制限しとるから優しく聞いてるんやで。",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221223212",
+    "title": "女が絡むとメンヘラになる ",
+    "content": "なんでかわからん。精神的には普段安定してる方で、一人でいることも苦にしないし、仕事でもかなりタフな自身がある。一方で、恋愛感情が絡むとまるでダメだ。西野カナみたいに会いたくてしょうがないし、嫉妬もすごくて狂いそうになる。なんでなんだろ。",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221223159",
+    "title": "anond:20200221222143",
+    "content": "そんなこと言ってるとナッツクラッカーが登場するから気を付けたほうがいいぞ",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221223155",
+    "title": "anond:20200221223050",
+    "content": "何ってお脳のおびょうきでしょそういう人ぜんぜん会ったことないの？",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221223103",
+    "title": "トイレ（大）の所要時間は人それぞれだから！って事を知ってくれ ",
+    "content": "ワイは一回につき平均10～15分かかる。　「う●こ？　2分で済むわ！」って人にはありえねえ！って思われてるんだろうな",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221223050",
+    "title": "anond:20200221222904",
+    "content": "ワイは君のこと心配やで・・・何に憑りつかれとるんや？",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221223013",
+    "title": "anond:20200221222143",
+    "content": "ステーキ肉をやわらかくする用のあのゴツゴツした奴で、発狂したメスゴリラみたいな勢いで叩いてもいい...？",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222946",
+    "title": "はてな民って ",
+    "content": "BEASTARS好きそうやな",
+    "bookmark_count": 2,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222929",
+    "title": "うちの娘の「世界で一番好きなこと」が判明した ",
+    "content": "サイゼリアで辛味チキンとポテト食べることだって…リッチになりてぇなあ…",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222837",
+    "title": "anond:20200219222753",
+    "content": "eraseToAnyPublisher()で全部AnyPublisherにして使うのが作法みたいに思えるけどそうでもないのでは？あれは他のPublisherと合成するときやらに使えるから使っているんじゃないかな。なぜ元の増田がそう思ったかと言うと、サンプルでeraseToAnyPublisher()してるコード多いからだよね。rayなんとかのCombineの本でもFutureをeraseToAnyPublisher()してる例はある。でも、あれって実際のアプリ開発というよりも本で説明するためという気もする。なので実際に我々がアプリ開発する時はFutureはFutureとしてインタフェース使ってWeb APIの結果を受け取るんじゃない？インタフェースとしてFutureで返すという制約の表現は普通に良いと思う。まあflatMapとかでそのインタフェース呼び出すんで結局それがFutureなのかどうかっていうのは、flatMapを書いている部分、つまり大抵はObservableObject側ではあんまり重要ではないとも言える。",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222654",
+    "title": "",
+    "content": "「お客様第一のルール、従業員第一の運用」なんか思いついたのでめも",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222636",
+    "title": "anond:20200221222250",
+    "content": "俺の理解では\"表現の自由\"を叫ぶ人間は基本的にコテコテの左翼のはずだったんだが最近はネット右翼までもがこれを叫んでいたりするのでかなりドン引く事が多い。やたらと多い。左翼は左翼でバイバイヴァンプの公開停止を求めるような事を叫んでいたりするしわけがわからん。ネット右翼も左翼も目指すところはナチスドイツか北朝鮮みたいな着地点なのか？一体どう理解すりゃいいんだあれは。",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222452",
+    "title": "ベテルギウスはすでに爆発している ",
+    "content": "ベテルギウスの記事を見ると、ベテルギウスはすでに爆発しているってブコメに書かずにはいられないんだ、と友人に言ったところ、君みたいな自分が生きてる間に超新星を見たいからっていう変なミーハー心でベテルギウスはすでに爆発しているなんて言う輩には心底辟易している、僕は2006年のオリオン座流星群で地球に来た口だが、僕みたいに地球人に擬態して暮らしているベテルギウス難民はごまんといるんだ、君たちにとっては太陽が爆発するようなものなんだ、軽々しくベテルギウスのことを語るのはやめてほしい、と言われた。今夜は鳥すきが食べたい。",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222433",
+    "title": "anond:20200221222358",
+    "content": "浴び放題かよ",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222257",
+    "title": "三大増田三国志",
+    "content": "めぐみんの馬騰、女は夏侯惇、あとひとつは？",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222250",
+    "title": "anond:20200221203716",
+    "content": "俺も今回のあれはフェミがネトウヨみたいなことをしてる事の方が気になった。",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222203",
+    "title": "anond:20200221221804",
+    "content": "サングリア？ってどんなんだっけあれはワインとかシャンパン入ってるのか",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222143",
+    "title": "anond:20200221220641",
+    "content": "いや俺のおちんちんを叩いてくれよ",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222137",
+    "title": "anond:20200221220750",
+    "content": "だとしても利用規約の「組織的な運用」に当たるのでダメですね。わかりやすい言葉を使うなら互助会禁止です。リアルユーザー同士で結託されるとルール壊れるタイプのシステムなのです。",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222104",
+    "title": "anond:20200221221941",
+    "content": "うんこ食べてる時に隣で料理されるよりいいだろ！",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222027",
+    "title": "anond:20200221221611",
+    "content": "それはワイが悪いな、すまんかった。",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222023",
+    "title": "めぐみんに馬騰されたい ",
+    "content": "馬董じゃだめなの",
+    "bookmark_count": 0,
+    "category": null
+  },
+  {
+    "masuda_id": "20200221222011",
+    "title": "anond:20200221221358",
+    "content": "愛ん",
+    "bookmark_count": 0,
+    "category": null
+  }
+]

@@ -5,8 +5,8 @@ import json
 content_length = []
 bookmark_count = []
 
-for i in range(1, 344):
-    with open("data/hot_entry/masuda_{0}.json".format(i), "r") as f:
+for i in range(2, 5000):
+    with open("data/entry/masuda_{0}.json".format(i), "r") as f:
         masuda_objs = json.load(f)
     for masuda in masuda_objs:
         if masuda["content"] is not None:
