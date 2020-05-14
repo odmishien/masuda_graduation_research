@@ -14,41 +14,56 @@ masudas = []
 hot_vectors = []
 vectors = []
 
+
+def get_nearest_index_of_value(list, num):
+    """
+    概要: リストからある値に最も近い値を返却する関数
+    @param list: データ配列
+    @param num: 対象値
+    @return 対象値に最も近い値
+    """
+
+    # リスト要素と対象値の差分を計算し最小値のインデックスを取得
+    idx = numpy.abs(numpy.asarray(list) - num).argmin()
+    return idx
+
 for i in range(1, 344):
     with open("data/hot_entry/masuda_{0}.json".format(i), "r") as f:
         hot_masuda_objs = json.load(f)
     for masuda in hot_masuda_objs:
         wakati_masuda = {}
-        node = mecab.parseToNode(masuda["content"])
-        sum_of_vector = 0
-        while node:
-            pos = node.feature.split(",")[0]
-            if pos == "名詞":
-                try:
-                    sum_of_vector += model[node.surface]
-                except:
-                    pass
-            node = node.next
-        hot_vectors.append(sum_of_vector)
-        hot_masudas.append(masuda)
+        if masuda["content"] is not None:
+            node = mecab.parseToNode(masuda["content"])
+            sum_of_vector = 0
+            while node:
+                pos = node.feature.split(",")[0]
+                if pos == "名詞":
+                    try:
+                        sum_of_vector += model[node.surface]
+                    except:
+                        pass
+                node = node.next
+            hot_vectors.append(sum_of_vector)
+            hot_masudas.append(masuda)
 
 for i in range(2, 5001):
     with open("data/entry/masuda_{0}.json".format(i), "r") as f:
         masuda_objs = json.load(f)
     for masuda in masuda_objs:
         wakati_masuda = {}
-        node = mecab.parseToNode(masuda["content"])
-        sum_of_vector = 0
-        while node:
-            pos = node.feature.split(",")[0]
-            if pos == "名詞":
-                try:
-                    sum_of_vector += model[node.surface]
-                except:
-                    pass
-            node = node.next
-        vectors.append(sum_of_vector)
-        masudas.append(masuda)
+        if masuda["content"] is not None:
+            node = mecab.parseToNode(masuda["content"])
+            sum_of_vector = 0
+            while node:
+                pos = node.feature.split(",")[0]
+                if pos == "名詞":
+                    try:
+                        sum_of_vector += model[node.surface]
+                    except:
+                        pass
+                node = node.next
+            vectors.append(sum_of_vector)
+            masudas.append(masuda)
 
 for i, vec in enumerate(hot_vectors):
     nearest_index = get_nearest_index_of_value(vectors, vec)
@@ -64,16 +79,3 @@ for i, vec in enumerate(hot_vectors):
     print("ホットエントリのvector:{0}".format(vec))
     print("似ているエントリのvector:{0}".format(vectors[nearest_index]))
     print("-------------------------------------------")
-
-
-def get_nearest_index_of_value(list, num):
-    """
-    概要: リストからある値に最も近い値を返却する関数
-    @param list: データ配列
-    @param num: 対象値
-    @return 対象値に最も近い値
-    """
-
-    # リスト要素と対象値の差分を計算し最小値のインデックスを取得
-    idx = numpy.abs(numpy.asarray(list) - num).argmin()
-    return idx
