@@ -1,14 +1,12 @@
-from gensim.models import KeyedVectors
-from gensim.models import Word2Vec
 import numpy
+from gensim.models import Word2Vec
 import json
 import MeCab
 
 corpusdir = "./model/"
-file_w2v_model = corpusdir + "w2v_all_vector200_win5_sgns0.vec"
+file_w2v_model = corpusdir + "word2vec.gensim.model"
 
-model = KeyedVectors.load_word2vec_format(
-    file_w2v_model, binary=False)
+model = Word2Vec.load(file_w2v_model)
 
 mecab = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
 hot_masudas = []
