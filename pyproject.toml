@@ -14,6 +14,7 @@ gensim = "^3.8.1"
 mecab-python3 = "^0.996.3"
 seaborn = "^0.10.0"
 japanize-matplotlib = "^1.0.5"
+markovify = "^0.8.0"
 
 [tool.poetry.dev-dependencies]
 

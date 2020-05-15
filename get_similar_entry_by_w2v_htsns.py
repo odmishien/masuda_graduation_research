@@ -1,12 +1,14 @@
 import numpy
 from gensim.models import Word2Vec
+from gensim.models import KeyedVectors
 import json
 import MeCab
 
 corpusdir = "./model/"
-file_w2v_model = corpusdir + "word2vec.gensim.model"
+file_w2v_model = corpusdir + "w2v_all_vector200_win5_sgns0.vec"
 
-model = Word2Vec.load(file_w2v_model)
+model = KeyedVectors.load_word2vec_format(
+    file_w2v_model, binary=False)
 
 mecab = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
 hot_masudas = []
@@ -24,7 +26,8 @@ def get_nearest_index_of_value(list, num):
     """
 
     # リスト要素と対象値の差分を計算し最小値のインデックスを取得
-    idx = numpy.abs(numpy.asarray(list) - num).argmin()
+    n = numpy.asarray(num)
+    idx = numpy.abs([numpy.sqrt(numpy.sum(numpy.asarray(l) - n)**2) for l in list]).argmin()
     return idx
 
 for i in range(1, 344):
@@ -67,7 +70,6 @@ for i in range(2, 5001):
 
 for i, vec in enumerate(hot_vectors):
     nearest_index = get_nearest_index_of_value(vectors, vec)
-    print("\n")
     print("id:{0}, ブクマ:{1}".format(
         hot_masudas[i]["masuda_id"], hot_masudas[i]["bookmark_count"]))
     print(hot_masudas[i]["content"])
@@ -76,6 +78,4 @@ for i, vec in enumerate(hot_vectors):
     print("id:{0}, ブクマ:{1}".format(
         masudas[nearest_index]["masuda_id"], masudas[nearest_index]["bookmark_count"]))
     print(masudas[nearest_index]["content"])
-    print("ホットエントリのvector:{0}".format(vec))
-    print("似ているエントリのvector:{0}".format(vectors[nearest_index]))
     print("-------------------------------------------")
