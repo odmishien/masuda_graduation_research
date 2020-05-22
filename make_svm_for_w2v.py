@@ -15,8 +15,8 @@ file_w2v_model = corpusdir + "w2v_all_vector200_win5_sgns0.vec"
 
 model = KeyedVectors.load_word2vec_format(
     file_w2v_model, binary=False)
-
-mecab = MeCab.Tagger('-d /usr/local/lib/mecab/dic/mecab-ipadic-neologd')
+mecab_path = os.getenv("MECAB_NEOLOGD_PATH")
+mecab = MeCab.Tagger('-d {}'.format(mecab_path))
 hot_masudas = []
 masudas = []
 hot_vectors = []
@@ -79,19 +79,23 @@ data_train, data_test, label_train, label_test = train_test_split(
 
 # トレーニングデータから分類器を作成 (Linear SVM)
 parameters = [
-    # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['linear'],'tol': [0.001,0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100,1000], 'class_weight':['balanced']},
-    # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['rbf'], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100,1000],'class_weight':['balanced']}
-    # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['poly'],'tol': [0.001,0.0001], 'degree': [2, 3, 4], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100],'class_weight':['balanced']},
-    # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['sigmoid'],'tol': [0.001,0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100],'class_weight':['balanced']}
+    {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['linear'], 'tol': [
+        0.001, 0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100, 1000], 'class_weight':['balanced']},
+    {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['rbf'], 'gamma':[
+        0.001, 0.01, 0.1, 1, 10, 100, 1000], 'class_weight':['balanced']}
+    {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['poly'], 'tol': [0.001, 0.0001],
+        'degree': [2, 3, 4], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100], 'class_weight':['balanced']},
+    {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['sigmoid'], 'tol': [
+        0.001, 0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100], 'class_weight':['balanced']}
 ]
-# estimator = GridSearchCV(SVC(), parameters, cv=2,n_jobs = -1,return_train_score=False)
+estimator = GridSearchCV(SVC(), parameters, cv=2,
+                         n_jobs=-1, return_train_score=False)
 print("-----estimate start-----")
-estimator = SVC(kernel='rbf', C=10, tol=0.01,
-                gamma='scale', class_weight="balanced")
+# estimator = SVC(kernel='rbf', C=10, tol=0.01, gamma='scale', class_weight="balanced")
 estimator.fit(data_train, label_train)
 # テストデータを分類器に入れる
 label_predict = estimator.predict(data_test)
 # Accuracy
-# print(estimator.best_params_)
-print(classification_report(label_test, label_predict, target_names=target_names))
-# print(accuracy_score(label_test, label_predict))
+print(estimator.best_params_)
+# print(classification_report(label_test, label_predict, target_names=target_names))
+print(accuracy_score(label_test, label_predict))
