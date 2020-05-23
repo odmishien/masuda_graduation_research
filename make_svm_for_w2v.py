@@ -79,14 +79,14 @@ data_train, data_test, label_train, label_test = train_test_split(
 
 # トレーニングデータから分類器を作成 (Linear SVM)
 parameters = [
-    {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['linear'], 'tol': [
-        0.001, 0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100, 1000], 'class_weight':['balanced']},
+    # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['linear'], 'tol': [
+    #     0.001, 0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100, 1000], 'class_weight':['balanced']},
     {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['rbf'], 'gamma':[
-        0.001, 0.01, 0.1, 1, 10, 100, 1000], 'class_weight':['balanced']},
-    {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['poly'], 'tol': [0.001, 0.0001],
-        'degree': [2, 3, 4], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100], 'class_weight':['balanced']},
-    {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['sigmoid'], 'tol': [
-        0.001, 0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100], 'class_weight':['balanced']}
+        0.001, 0.01, 0.1, 1, 10, 100, 1000], 'class_weight':['balanced']}
+    # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['poly'], 'tol': [0.001, 0.0001],
+    #     'degree': [2, 3, 4], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100], 'class_weight':['balanced']},
+    # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['sigmoid'], 'tol': [
+    #     0.001, 0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100], 'class_weight':['balanced']}
 ]
 estimator = GridSearchCV(SVC(), parameters, cv=2,
                          n_jobs=-1, return_train_score=False)
