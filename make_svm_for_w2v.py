@@ -90,12 +90,14 @@ parameters = [
 ]
 estimator = GridSearchCV(SVC(), parameters, cv=2,
                          n_jobs=-1, return_train_score=False)
-print("-----estimate start-----")
+print("-----estimate start-----", flush=True)
 # estimator = SVC(kernel='rbf', C=10, tol=0.01, gamma='scale', class_weight="balanced")
 estimator.fit(data_train, label_train)
+print("-----estimate fitting completed-----", flush=True)
 # テストデータを分類器に入れる
 label_predict = estimator.predict(data_test)
+print("-----label_predict defined-----", flush=True)
 # Accuracy
-print(estimator.best_params_)
+print(estimator.best_params_, flush=True)
 # print(classification_report(label_test, label_predict, target_names=target_names))
-print(accuracy_score(label_test, label_predict))
+print(accuracy_score(label_test, label_predict), flush=True)
