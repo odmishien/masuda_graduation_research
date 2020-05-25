@@ -81,8 +81,8 @@ data_train, data_test, label_train, label_test = train_test_split(
 parameters = [
     # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['linear'], 'tol': [
     #     0.001, 0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100, 1000], 'class_weight':['balanced']},
-    {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['rbf'], 'gamma':[
-        0.001, 0.01, 0.1, 1, 10, 100, 1000], 'class_weight':['balanced']}
+    {'C': [0.1, 1, 10], 'kernel': ['rbf'], 'gamma':[
+        0.1, 1, 10], 'class_weight':['balanced']}
     # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['poly'], 'tol': [0.001, 0.0001],
     #     'degree': [2, 3, 4], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100], 'class_weight':['balanced']},
     # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['sigmoid'], 'tol': [
