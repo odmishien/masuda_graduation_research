@@ -79,25 +79,22 @@ data_train, data_test, label_train, label_test = train_test_split(
 
 # トレーニングデータから分類器を作成 (Linear SVM)
 parameters = [
-    # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['linear'], 'tol': [
-    #     0.001, 0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100, 1000], 'class_weight':['balanced']},
-    {'C': [0.1, 1, 10], 'kernel': ['rbf'], 'gamma':[
-        0.1, 1, 10], 'class_weight':['balanced']}
-    # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['poly'], 'tol': [0.001, 0.0001],
-    #     'degree': [2, 3, 4], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100], 'class_weight':['balanced']},
-    # {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['sigmoid'], 'tol': [
-    #     0.001, 0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100], 'class_weight':['balanced']}
+    {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['linear'], 'tol': [
+        0.001, 0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100, 1000], 'class_weight':['balanced']},
+    {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['rbf'], 'gamma':[
+        0.001, 0.01, 0.1, 1, 10, 100, 1000], 'class_weight':['balanced']},
+    {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['poly'], 'tol': [0.001, 0.0001],
+        'degree': [2, 3, 4], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100], 'class_weight':['balanced']},
+    {'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000], 'kernel': ['sigmoid'], 'tol': [
+        0.001, 0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100], 'class_weight':['balanced']}
 ]
-# estimator = GridSearchCV(SVC(), parameters, cv=2,
-#  n_jobs = -1, return_train_score = False)
-print("-----estimate start-----", flush=True)
-estimator = SVC(kernel='rbf', C=1, gamma=0.1, class_weight="balanced")
+estimator = GridSearchCV(SVC(), parameters, cv=2, n_jobs=-1, return_train_score=False, scoring="precision_weighted")
+# estimator = SVC(kernel='rbf', C=10, tol=0.01, gamma='scale', class_weight="balanced")
 estimator.fit(data_train, label_train)
-print("-----estimate fitting completed-----", flush=True)
 # テストデータを分類器に入れる
 label_predict = estimator.predict(data_test)
-print("-----label_predict defined-----", flush=True)
 # Accuracy
-# print(estimator.best_params_, flush=True)
-print(classification_report(label_test, label_predict, target_names=target_names))
+print(estimator.best_params_, flush=True)
+print(estimator.grid_scores_, flush=True)
+# print(classification_report(label_test, label_predict, target_names=target_names))
 print(accuracy_score(label_test, label_predict), flush=True)
