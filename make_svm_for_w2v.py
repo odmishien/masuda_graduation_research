@@ -95,6 +95,6 @@ estimator.fit(data_train, label_train)
 label_predict = estimator.predict(data_test)
 # Accuracy
 print(estimator.best_params_, flush=True)
-print(estimator.grid_scores_, flush=True)
+print(estimator.cv_results_, flush=True)
 # print(classification_report(label_test, label_predict, target_names=target_names))
 print(accuracy_score(label_test, label_predict), flush=True)
