@@ -46,7 +46,7 @@ for i in range(2, 5001):
         if masuda["content"] is not None:
             node = mecab.parseToNode(masuda["content"])
             sum_of_vector = 0
-           while node:
+            while node:
                 try:
                     sum_of_vector += model[node.surface]
                 except:
