@@ -51,7 +51,7 @@ def get_masuda_list(url):
             pass
         else:
             if clawl_hot_entry:
-                if bookmark_num > hot_entry_standard_min && bookmark_num < hot_entry_standard_max:
+                if bookmark_num > hot_entry_standard_min & bookmark_num < hot_entry_standard_max:
                     title = h3.get_text().lstrip("■")
                     text = p.get_text()
                     # text = re.sub(
