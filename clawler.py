@@ -88,7 +88,7 @@ def dump_list_to_json(masuda_list, page):
     data_path = "./data/entry"
     if clawl_hot_entry:
         data_path = "./data/hot_entry"
-    if len(masuda_list > 0):
+    if len(masuda_list) > 0:
         with open('{data_path}/masuda_{page}.json'.format(data_path=data_path, page=page), 'w') as f:
             json.dump(masuda_list, f, indent=2, ensure_ascii=False)
 
