@@ -5,7 +5,10 @@ import json
 import re
 import sys
 
-clawl_zero_bookmark = True
+clawl_zero_bookmark = False
+clawl_hot_entry = True
+hot_entry_standard_min = 100
+hot_entry_standard_max = 200
 
 
 def get_masuda_list(url):
@@ -47,26 +50,47 @@ def get_masuda_list(url):
         if not clawl_zero_bookmark and bookmark_num == 0:
             pass
         else:
-            title = h3.get_text().lstrip("■")
-            text = p.get_text()
-            # text = re.sub(
-            #     r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', "", text)  # URL文字列
-            # text = re.sub(r'[!-~]', "", text)  # 半角記号,数字,英字
-            # text = re.sub(r'[︰-＠]', "", text)  # 全角記号
-            masuda_id = entry_url.lstrip("/")
-            masuda = {}
-            masuda["masuda_id"] = masuda_id
-            masuda["title"] = title
-            masuda["content"] = text
-            masuda["bookmark_count"] = bookmark_num
-            masuda["category"] = None
-            masuda_list.append(masuda)
+            if clawl_hot_entry:
+                if bookmark_num > hot_entry_standard_min && bookmark_num < hot_entry_standard_max:
+                    title = h3.get_text().lstrip("■")
+                    text = p.get_text()
+                    # text = re.sub(
+                    #     r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', "", text)  # URL文字列
+                    # text = re.sub(r'[!-~]', "", text)  # 半角記号,数字,英字
+                    # text = re.sub(r'[︰-＠]', "", text)  # 全角記号
+                    masuda_id = entry_url.lstrip("/")
+                    masuda = {}
+                    masuda["masuda_id"] = masuda_id
+                    masuda["title"] = title
+                    masuda["content"] = text
+                    masuda["bookmark_count"] = bookmark_num
+                    masuda["category"] = None
+                    masuda_list.append(masuda)
+            else:
+                title = h3.get_text().lstrip("■")
+                text = p.get_text()
+                # text = re.sub(
+                #     r'https?://[\w/:%#\$&\?\(\)~\.=\+\-…]+', "", text)  # URL文字列
+                # text = re.sub(r'[!-~]', "", text)  # 半角記号,数字,英字
+                # text = re.sub(r'[︰-＠]', "", text)  # 全角記号
+                masuda_id = entry_url.lstrip("/")
+                masuda = {}
+                masuda["masuda_id"] = masuda_id
+                masuda["title"] = title
+                masuda["content"] = text
+                masuda["bookmark_count"] = bookmark_num
+                masuda["category"] = None
+                masuda_list.append(masuda)
     return masuda_list
 
 
-def dump_list_to_json(list, page):
-    with open('./data/entry/masuda_{page}.json'.format(page=page), 'w') as f:
-        json.dump(masuda_list, f, indent=2, ensure_ascii=False)
+def dump_list_to_json(masuda_list, page):
+    data_path = "./data/entry"
+    if clawl_hot_entry:
+        data_path = "./data/hot_entry"
+    if len(masuda_list > 0):
+        with open('{data_path}/masuda_{page}.json'.format(data_path=data_path, page=page), 'w') as f:
+            json.dump(masuda_list, f, indent=2, ensure_ascii=False)
 
 
 args = sys.argv
