@@ -1,0 +1,12 @@
+nohup: ignoring input
+-----文章読み込み終わり-----
+              precision    recall  f1-score   support
+
+     class 0       0.99      0.94      0.96     12409
+     class 1       0.37      0.86      0.52       531
+
+    accuracy                           0.93     12940
+   macro avg       0.68      0.90      0.74     12940
+weighted avg       0.97      0.93      0.95     12940
+
+0.9337712519319938

@@ -1,0 +1,15 @@
+nohup: ignoring input
+-----文章読み込み終わり-----
+-----estimate start-----
+-----estimate fitting completed-----
+-----label_predict defined-----
+              precision    recall  f1-score   support
+
+     class 0       0.93      1.00      0.96     11988
+     class 1       0.37      0.02      0.04       880
+
+    accuracy                           0.93     12868
+   macro avg       0.65      0.51      0.50     12868
+weighted avg       0.89      0.93      0.90     12868
+
+0.9306030463164439

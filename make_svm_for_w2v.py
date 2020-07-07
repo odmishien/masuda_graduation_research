@@ -22,22 +22,24 @@ masudas = []
 hot_vectors = []
 vectors = []
 
-for i in range(1, 344):
-    with open("data/hot_entry_no_noun_and_adj/masuda_{0}.json".format(i), "r") as f:
-        hot_masuda_objs = json.load(f)
-    for masuda in hot_masuda_objs:
-        if masuda["content"] is not None:
-            node = mecab.parseToNode(masuda["content"])
-            sum_of_vector = 0
-            while node:
-                try:
-                    sum_of_vector += model[node.surface]
-                except:
-                    pass
-                node = node.next
-            if type(sum_of_vector) is not int:
-                hot_vectors.append(sum_of_vector)
-                hot_masudas.append(masuda)
+for i in range(1, 4995):
+    if os.path.exists("data/hot_entry_no_noun_and_adj/masuda_{0}.json".format(i)):
+        with open("data/hot_entry_no_noun_and_adj/masuda_{0}.json".format(i), "r") as f:
+            hot_masuda_objs = json.load(f)
+        for masuda in hot_masuda_objs:
+            if masuda["content"] is not None:
+                node = mecab.parseToNode(masuda["content"])
+                sum_of_vector = 0
+                while node:
+                    try:
+                        sum_of_vector += model[node.surface]
+                    except:
+                        pass
+                    node = node.next
+                if type(sum_of_vector) is not int:
+                    hot_vectors.append(sum_of_vector)
+                    hot_masudas.append(masuda)
+    
 
 for i in range(2, 5001):
     with open("data/entry_no_noun_and_adj/masuda_{0}.json".format(i), "r") as f:
@@ -83,7 +85,7 @@ data_train, data_test, label_train, label_test = train_test_split(
 #         0.001, 0.0001], 'gamma':[0.001, 0.01, 0.1, 1, 10, 100], 'class_weight':['balanced']}
 # ]
 # estimator = GridSearchCV(SVC(), parameters, cv=2, n_jobs=-1, return_train_score=False, scoring="precision_weighted")
-estimator = SVC(kernel='rbf', C=10, tol=0.01, gamma='scale', class_weight="balanced")
+estimator = SVC(kernel='rbf', C=1000, tol=0.01, gamma='scale', class_weight="balanced")
 estimator.fit(data_train, label_train)
 # テストデータを分類器に入れる
 label_predict = estimator.predict(data_test)
