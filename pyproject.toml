@@ -15,6 +15,7 @@ mecab-python3 = "^0.996.3"
 seaborn = "^0.10.0"
 japanize-matplotlib = "^1.0.5"
 markovify = "^0.8.0"
+regex = "^2020.6.8"
 
 [tool.poetry.dev-dependencies]
 

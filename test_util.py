@@ -1,0 +1,42 @@
+import unittest
+import util
+
+class TestUtil(unittest.TestCase):
+    def test_get_num_of_sentences(self):
+        text = "こんにちは！今日はいい天気だと思います。そう思いませんか？私は思いませんが...。"
+        expected = 4
+        got = util.get_num_of_sentences(text)
+        self.assertEqual(expected, got)
+
+    def test_get_num_of_comma(self):
+        text = "あの、えっと、その、たくさん、読点を、打っています。"
+        expected = 5
+        got = util.get_num_of_comma(text)
+        self.assertEqual(expected, got)
+
+    def test_get_num_of_period(self):
+        text = "吾輩は猫である。名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。"
+        expected = 4
+        got = util.get_num_of_period(text)
+        self.assertEqual(expected, got)
+
+    def test_get_length_of_text(self):
+        text = "これは8文字の文"
+        expected = 8
+        got = util.get_length_of_text(text)
+        self.assertEqual(expected, got)
+
+    def test_get_distance_btw_commas(self):
+        text = "あの、えっと、その、たくさん、読点を、打っています。"
+        expected = float(26 - 5 - 1) / (5 + 1)
+        got = util.get_distance_btw_commas(text)
+        self.assertEqual(expected, got)
+
+    def test_get_kanji_content_rate(self):
+        text = "漢字ひらがなカタカナ漢字ひらがなカタカナ"
+        expected = float(4 / 20)
+        got = util.get_kanji_content_rate(text)
+        self.assertEqual(expected, got)
+
+if __name__ == "__main__":
+    unittest.main()

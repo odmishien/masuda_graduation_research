@@ -253,6 +253,14 @@ version = "2020.1"
 
 [[package]]
 category = "main"
+description = "Alternative regular expression module, to replace re."
+name = "regex"
+optional = false
+python-versions = "*"
+version = "2020.6.8"
+
+[[package]]
+category = "main"
 description = "Python HTTP for Humans."
 name = "requests"
 optional = false
@@ -378,7 +386,7 @@ secure = ["certifi", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "pyOpenSSL (>=0
 socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7,<2.0)"]
 
 [metadata]
-content-hash = "ed85fe4fdeed929a7b926c95b30275fbf399545e30033fac5ae75537c9b6237f"
+content-hash = "34481c9c69e47e9503ca01777e146d68befb219f8ad5ee0b9724b7a9d303a3f2"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -392,6 +400,7 @@ boto = [
     {file = "boto-2.49.0.tar.gz", hash = "sha256:ea0d3b40a2d852767be77ca343b58a9e3a4b00d9db440efb8da74b4e58025e5a"},
 ]
 boto3 = [
+    {file = "boto3-1.13.9-py2.py3-none-any.whl", hash = "sha256:ab39015dd1a66fb9e549fd4a1a7903fad2cef83a1e7fe0711bbc7c93802bc1b3"},
     {file = "boto3-1.13.9.tar.gz", hash = "sha256:06dd5d0f2ed3570f60eab04b9f04d229ff980b55102447481992756efe268639"},
 ]
 botocore = [
@@ -502,16 +511,19 @@ kiwisolver = [
     {file = "kiwisolver-1.2.0-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:443c2320520eda0a5b930b2725b26f6175ca4453c61f739fef7a5847bd262f74"},
     {file = "kiwisolver-1.2.0-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:efcf3397ae1e3c3a4a0a0636542bcad5adad3b1dd3e8e629d0b6e201347176c8"},
     {file = "kiwisolver-1.2.0-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:fccefc0d36a38c57b7bd233a9b485e2f1eb71903ca7ad7adacad6c28a56d62d2"},
+    {file = "kiwisolver-1.2.0-cp36-cp36m-manylinux2014_aarch64.whl", hash = "sha256:be046da49fbc3aa9491cc7296db7e8d27bcf0c3d5d1a40259c10471b014e4e0c"},
     {file = "kiwisolver-1.2.0-cp36-none-win32.whl", hash = "sha256:60a78858580761fe611d22127868f3dc9f98871e6fdf0a15cc4203ed9ba6179b"},
     {file = "kiwisolver-1.2.0-cp36-none-win_amd64.whl", hash = "sha256:556da0a5f60f6486ec4969abbc1dd83cf9b5c2deadc8288508e55c0f5f87d29c"},
     {file = "kiwisolver-1.2.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:7cc095a4661bdd8a5742aaf7c10ea9fac142d76ff1770a0f84394038126d8fc7"},
     {file = "kiwisolver-1.2.0-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:c955791d80e464da3b471ab41eb65cf5a40c15ce9b001fdc5bbc241170de58ec"},
     {file = "kiwisolver-1.2.0-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:603162139684ee56bcd57acc74035fceed7dd8d732f38c0959c8bd157f913fec"},
+    {file = "kiwisolver-1.2.0-cp37-cp37m-manylinux2014_aarch64.whl", hash = "sha256:63f55f490b958b6299e4e5bdac66ac988c3d11b7fafa522800359075d4fa56d1"},
     {file = "kiwisolver-1.2.0-cp37-none-win32.whl", hash = "sha256:03662cbd3e6729f341a97dd2690b271e51a67a68322affab12a5b011344b973c"},
     {file = "kiwisolver-1.2.0-cp37-none-win_amd64.whl", hash = "sha256:4eadb361baf3069f278b055e3bb53fa189cea2fd02cb2c353b7a99ebb4477ef1"},
     {file = "kiwisolver-1.2.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:c31bc3c8e903d60a1ea31a754c72559398d91b5929fcb329b1c3a3d3f6e72113"},
     {file = "kiwisolver-1.2.0-cp38-cp38-manylinux1_i686.whl", hash = "sha256:d52b989dc23cdaa92582ceb4af8d5bcc94d74b2c3e64cd6785558ec6a879793e"},
     {file = "kiwisolver-1.2.0-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:e586b28354d7b6584d8973656a7954b1c69c93f708c0c07b77884f91640b7657"},
+    {file = "kiwisolver-1.2.0-cp38-cp38-manylinux2014_aarch64.whl", hash = "sha256:38d05c9ecb24eee1246391820ed7137ac42a50209c203c908154782fced90e44"},
     {file = "kiwisolver-1.2.0-cp38-none-win32.whl", hash = "sha256:d069ef4b20b1e6b19f790d00097a5d5d2c50871b66d10075dab78938dc2ee2cf"},
     {file = "kiwisolver-1.2.0-cp38-none-win_amd64.whl", hash = "sha256:18d749f3e56c0480dccd1714230da0f328e6e4accf188dd4e6884bdd06bf02dd"},
     {file = "kiwisolver-1.2.0.tar.gz", hash = "sha256:247800260cd38160c362d211dcaf4ed0f7816afb5efe56544748b21d6ad6d17f"},
@@ -618,6 +630,29 @@ python-dateutil = [
 pytz = [
     {file = "pytz-2020.1-py2.py3-none-any.whl", hash = "sha256:a494d53b6d39c3c6e44c3bec237336e14305e4f29bbf800b599253057fbb79ed"},
     {file = "pytz-2020.1.tar.gz", hash = "sha256:c35965d010ce31b23eeb663ed3cc8c906275d6be1a34393a1d73a41febf4a048"},
+]
+regex = [
+    {file = "regex-2020.6.8-cp27-cp27m-win32.whl", hash = "sha256:fbff901c54c22425a5b809b914a3bfaf4b9570eee0e5ce8186ac71eb2025191c"},
+    {file = "regex-2020.6.8-cp27-cp27m-win_amd64.whl", hash = "sha256:112e34adf95e45158c597feea65d06a8124898bdeac975c9087fe71b572bd938"},
+    {file = "regex-2020.6.8-cp36-cp36m-manylinux1_i686.whl", hash = "sha256:92d8a043a4241a710c1cf7593f5577fbb832cf6c3a00ff3fc1ff2052aff5dd89"},
+    {file = "regex-2020.6.8-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:bae83f2a56ab30d5353b47f9b2a33e4aac4de9401fb582b55c42b132a8ac3868"},
+    {file = "regex-2020.6.8-cp36-cp36m-manylinux2010_i686.whl", hash = "sha256:b2ba0f78b3ef375114856cbdaa30559914d081c416b431f2437f83ce4f8b7f2f"},
+    {file = "regex-2020.6.8-cp36-cp36m-manylinux2010_x86_64.whl", hash = "sha256:95fa7726d073c87141f7bbfb04c284901f8328e2d430eeb71b8ffdd5742a5ded"},
+    {file = "regex-2020.6.8-cp36-cp36m-win32.whl", hash = "sha256:e3cdc9423808f7e1bb9c2e0bdb1c9dc37b0607b30d646ff6faf0d4e41ee8fee3"},
+    {file = "regex-2020.6.8-cp36-cp36m-win_amd64.whl", hash = "sha256:c78e66a922de1c95a208e4ec02e2e5cf0bb83a36ceececc10a72841e53fbf2bd"},
+    {file = "regex-2020.6.8-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:08997a37b221a3e27d68ffb601e45abfb0093d39ee770e4257bd2f5115e8cb0a"},
+    {file = "regex-2020.6.8-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:2f6f211633ee8d3f7706953e9d3edc7ce63a1d6aad0be5dcee1ece127eea13ae"},
+    {file = "regex-2020.6.8-cp37-cp37m-manylinux2010_i686.whl", hash = "sha256:55b4c25cbb3b29f8d5e63aeed27b49fa0f8476b0d4e1b3171d85db891938cc3a"},
+    {file = "regex-2020.6.8-cp37-cp37m-manylinux2010_x86_64.whl", hash = "sha256:89cda1a5d3e33ec9e231ece7307afc101b5217523d55ef4dc7fb2abd6de71ba3"},
+    {file = "regex-2020.6.8-cp37-cp37m-win32.whl", hash = "sha256:690f858d9a94d903cf5cada62ce069b5d93b313d7d05456dbcd99420856562d9"},
+    {file = "regex-2020.6.8-cp37-cp37m-win_amd64.whl", hash = "sha256:1700419d8a18c26ff396b3b06ace315b5f2a6e780dad387e4c48717a12a22c29"},
+    {file = "regex-2020.6.8-cp38-cp38-manylinux1_i686.whl", hash = "sha256:654cb773b2792e50151f0e22be0f2b6e1c3a04c5328ff1d9d59c0398d37ef610"},
+    {file = "regex-2020.6.8-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:52e1b4bef02f4040b2fd547357a170fc1146e60ab310cdbdd098db86e929b387"},
+    {file = "regex-2020.6.8-cp38-cp38-manylinux2010_i686.whl", hash = "sha256:cf59bbf282b627130f5ba68b7fa3abdb96372b24b66bdf72a4920e8153fc7910"},
+    {file = "regex-2020.6.8-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:5aaa5928b039ae440d775acea11d01e42ff26e1561c0ffcd3d805750973c6baf"},
+    {file = "regex-2020.6.8-cp38-cp38-win32.whl", hash = "sha256:97712e0d0af05febd8ab63d2ef0ab2d0cd9deddf4476f7aa153f76feef4b2754"},
+    {file = "regex-2020.6.8-cp38-cp38-win_amd64.whl", hash = "sha256:6ad8663c17db4c5ef438141f99e291c4d4edfeaacc0ce28b5bba2b0bf273d9b5"},
+    {file = "regex-2020.6.8.tar.gz", hash = "sha256:e9b64e609d37438f7d6e68c2546d2cb8062f3adb27e6336bc129b51be20773ac"},
 ]
 requests = [
     {file = "requests-2.23.0-py2.py3-none-any.whl", hash = "sha256:43999036bfa82904b6af1d99e4882b560e5e2c68e5c4b0aa03b655f3d7d73fee"},
