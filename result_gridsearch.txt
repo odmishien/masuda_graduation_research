@@ -1,6 +1,0 @@
-nohup: ignoring input
------文章読み込み終わり-----
-/home/mishima/.local/lib/python3.6/site-packages/joblib/externals/loky/backend/resource_tracker.py:320: UserWarning: resource_tracker: There appear to be 14 leaked semlock objects to clean up at shutdown
-  (len(rtype_registry), rtype))
-/home/mishima/.local/lib/python3.6/site-packages/joblib/externals/loky/backend/resource_tracker.py:320: UserWarning: resource_tracker: There appear to be 2 leaked folder objects to clean up at shutdown
-  (len(rtype_registry), rtype))
