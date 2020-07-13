@@ -38,5 +38,11 @@ class TestUtil(unittest.TestCase):
         got = util.get_kanji_content_rate(text)
         self.assertEqual(expected, got)
 
+    def test_get_sentiment_polarity_score(self):
+        text = '遅刻したけど楽しかったし嬉しかった。すごく充実した！'
+        expected = (0.3333333333333333 + 1) / 2
+        got = util.get_sentiment_polarity_score(text)
+        self.assertEqual(expected, got)
+
 if __name__ == "__main__":
     unittest.main()

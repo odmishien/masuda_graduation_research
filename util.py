@@ -1,5 +1,6 @@
 import re
 import regex
+import oseti
 
 def get_num_of_sentences(text):
     split_text = re.split('[。！？!?]', text)
@@ -35,4 +36,16 @@ def get_kanji_content_rate(text):
         kana_count += len(hiragana)
     for katakana in katakana_list:
         kana_count += len(katakana)
+    if kanji_count == 0:
+        return 0
     return float(kanji_count) / (kanji_count + kana_count)
+
+# 評価極性スコア
+# osetiを使う
+def get_sentiment_polarity_score(text):
+    analyzer = oseti.Analyzer()
+    score = analyzer.analyze(text)
+    if (len(score) > 0):
+        return sum(score) / len(score)
+    else:
+        return 0

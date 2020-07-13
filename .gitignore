@@ -7,3 +7,4 @@ model/
 result/
 .envrc
 pickle/
+data/
