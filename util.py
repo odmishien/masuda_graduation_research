@@ -1,6 +1,8 @@
 import re
 import regex
 import oseti
+import requests
+from bs4 import BeautifulSoup
 
 def get_num_of_sentences(text):
     split_text = re.split('[。！？!?]', text)
@@ -49,3 +51,24 @@ def get_sentiment_polarity_score(text):
         return sum(score) / len(score)
     else:
         return 0
+
+def get_raising_discussion_score(masuda_id, bookmark_count):
+    if bookmark_count == 0:
+        return 0
+    url = "https://b.hatena.ne.jp/entry/s/anond.hatelabo.jp/{masuda_id}".format(masuda_id=masuda_id)
+    res = requests.get(url)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    if soup.find('span','entry-info-comment'):
+        comment_count = int(soup.find('span','entry-info-comment').find('span').get_text())
+        if comment_count != 0:
+            return comment_count / bookmark_count
+        else:
+            return 0
+    else:
+        return 0
+
+def min_max(l):
+    l_min = min(l)
+    l_max = max(l)
+    return [(i - l_min) / (l_max - l_min) for i in l]
+

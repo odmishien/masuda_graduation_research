@@ -44,5 +44,12 @@ class TestUtil(unittest.TestCase):
         got = util.get_sentiment_polarity_score(text)
         self.assertEqual(expected, got)
 
+    def test_get_raising_discussion_score(self):
+        masuda_id = '20200628072917'
+        bookmark_count = 1687
+        expected = 346 / bookmark_count
+        got = util.get_raising_discussion_score(masuda_id, bookmark_count)
+        self.assertEqual(expected, got)
+
 if __name__ == "__main__":
     unittest.main()
