@@ -19,6 +19,7 @@ regex = "^2020.6.8"
 pandas = "^1.0.5"
 oseti = "^0.2"
 tqdm = "^4.47.0"
+wordcloud = "^1.7.0"
 
 [tool.poetry.dev-dependencies]
 autopep8 = "^1.5.3"

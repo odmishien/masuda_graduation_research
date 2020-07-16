@@ -14,6 +14,12 @@ def get_num_of_comma(text):
 def get_num_of_period(text):
     return text.count('。')
 
+def get_num_of_exclamation_mark(text):
+    return text.count('!') + text.count('！')
+
+def get_num_of_question_mark(text):
+    return text.count('?') + text.count('？')
+
 def get_length_of_text(text):
     return len(text)
 
@@ -67,8 +73,11 @@ def get_raising_discussion_score(masuda_id, bookmark_count):
     else:
         return 0
 
+# 1次元のリストにある数値を0-1に正規化する
 def min_max(l):
     l_min = min(l)
     l_max = max(l)
     return [(i - l_min) / (l_max - l_min) for i in l]
 
+def get_unique_elements_btw_list(a, b):
+    return list(set(a) - set(b))

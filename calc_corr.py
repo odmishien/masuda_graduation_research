@@ -14,6 +14,8 @@ bookmark_counts = []
 nums_of_sentences = []
 nums_of_comma = []
 nums_of_period = []
+nums_of_exclamation_mark = []
+nums_of_question_mark = []
 lengths_of_text = []
 distances_btw_commas = []
 kanji_content_rates = []
@@ -29,6 +31,8 @@ for i in range(1, 4995):
             nums_of_sentences.append(masuda["num_of_sentences"])
             nums_of_comma.append(masuda["num_of_comma"])
             nums_of_period.append(masuda["num_of_period"])
+            nums_of_exclamation_mark.append(masuda["num_of_exclamation_mark"])
+            nums_of_question_mark.append(masuda["num_of_question_mark"])
             lengths_of_text.append(masuda["length_of_text"])
             distances_btw_commas.append(masuda["distance_btw_commas"])
             kanji_content_rates.append(masuda["kanji_content_rate"])
@@ -47,6 +51,8 @@ for i in range(2, 5001):
             nums_of_sentences.append(masuda["num_of_sentences"])
             nums_of_comma.append(masuda["num_of_comma"])
             nums_of_period.append(masuda["num_of_period"])
+            nums_of_exclamation_mark.append(masuda["num_of_exclamation_mark"])
+            nums_of_question_mark.append(masuda["num_of_question_mark"])
             lengths_of_text.append(masuda["length_of_text"])
             distances_btw_commas.append(masuda["distance_btw_commas"])
             kanji_content_rates.append(masuda["kanji_content_rate"])
@@ -60,15 +66,17 @@ bookmark_counts = util.min_max(bookmark_counts)
 nums_of_sentences = util.min_max(nums_of_sentences)
 nums_of_comma = util.min_max(nums_of_comma)
 nums_of_period = util.min_max(nums_of_period)
+nums_of_exclamation_mark = util.min_max(nums_of_exclamation_mark)
+nums_of_question_mark = util.min_max(nums_of_question_mark)
 lengths_of_text = util.min_max(lengths_of_text)
 distances_btw_commas = util.min_max(distances_btw_commas)
 kanji_content_rates = util.min_max(kanji_content_rates)
 sentiment_polarity_scores = util.min_max(sentiment_polarity_scores)
 raising_discussion_scores = util.min_max(raising_discussion_scores)
 
-for bc, ns, nc, np, lt, dbc, kcr, sps, rds in zip(bookmark_counts, nums_of_sentences, nums_of_comma, nums_of_period, lengths_of_text, distances_btw_commas, kanji_content_rates, sentiment_polarity_scores, raising_discussion_scores):
+for bc, ns, nc, np, ne, nq, lt, dbc, kcr, sps, rds in zip(bookmark_counts, nums_of_sentences, nums_of_comma, nums_of_period, nums_of_exclamation_mark, nums_of_question_mark, lengths_of_text, distances_btw_commas, kanji_content_rates, sentiment_polarity_scores, raising_discussion_scores):
     all_data.append([
-        bc, ns, nc, np, lt, dbc, kcr, sps, rds
+        bc, ns, nc, np, ne, nq, lt, dbc, kcr, sps, rds
     ])
 
 df = pd.DataFrame(
@@ -78,6 +86,8 @@ df = pd.DataFrame(
         "num_of_sentences",
         "num_of_comma",
         "num_of_period",
+        "num_of_exclamation_mark",
+        "num_of_question_mark",
         "length_of_text",
         "distance_btw_commas",
         "kanji_content_rate",

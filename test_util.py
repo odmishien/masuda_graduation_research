@@ -20,6 +20,18 @@ class TestUtil(unittest.TestCase):
         got = util.get_num_of_period(text)
         self.assertEqual(expected, got)
 
+    def test_get_num_of_exclamation_mark(self):
+        text = "これは！！！びっくりマークが！！！9個ついてる!!!"
+        expected = 9
+        got = util.get_num_of_exclamation_mark(text)
+        self.assertEqual(expected, got)
+
+    def test_get_num_of_question_mark(self):
+        text = "これは???はてなマークが?？?9個ついてる？？？"
+        expected = 9
+        got = util.get_num_of_question_mark(text)
+        self.assertEqual(expected, got)
+
     def test_get_length_of_text(self):
         text = "これは8文字の文"
         expected = 8
@@ -49,6 +61,13 @@ class TestUtil(unittest.TestCase):
         bookmark_count = 1687
         expected = 346 / bookmark_count
         got = util.get_raising_discussion_score(masuda_id, bookmark_count)
+        self.assertEqual(expected, got)
+
+    def test_get_unique_elements_btw_list(self):
+        a = ["あ", "い", "う"]
+        b = ["い", "か"]
+        expected = ["あ", "う"]
+        got = util.get_unique_elements_btw_list(a, b)
         self.assertEqual(expected, got)
 
 if __name__ == "__main__":
