@@ -42,6 +42,8 @@ include_tokubetsu_labels = []
 include_special_labels = []
 include_totteoki_labels = []
 include_dakeno_labels = []
+highest_similarities = []
+lowest_similarities = []
 
 for i in range(1, 4995):
     if os.path.exists("data/hot_entry/masuda_{0}.json".format(i)):
@@ -83,6 +85,8 @@ for i in range(1, 4995):
             include_tukurikata_labels.append(masuda["is_include_tukurikata"])
             include_uragawa_labels.append(masuda["is_include_uragawa"])
             include_zittai_labels.append(masuda["is_include_zittai"])
+            highest_similarities.append(masuda["highest_similarity"])
+            lowest_similarities.append(masuda["lowest_similarity"])
 
 
 for i in range(2, 5001):
@@ -125,6 +129,8 @@ for i in range(2, 5001):
             include_tukurikata_labels.append(masuda["is_include_tukurikata"])
             include_uragawa_labels.append(masuda["is_include_uragawa"])
             include_zittai_labels.append(masuda["is_include_zittai"])
+            highest_similarities.append(masuda["highest_similarity"])
+            lowest_similarities.append(masuda["lowest_similarity"])
 
 bookmark_counts = util.min_max(bookmark_counts)
 nums_of_sentences = util.min_max(nums_of_sentences)
@@ -137,10 +143,12 @@ distances_btw_commas = util.min_max(distances_btw_commas)
 kanji_content_rates = util.min_max(kanji_content_rates)
 sentiment_polarity_scores = util.min_max(sentiment_polarity_scores)
 raising_discussion_scores = util.min_max(raising_discussion_scores)
+highest_similarities = util.min_max(highest_similarities)
+lowest_similarities = util.min_max(lowest_similarities)
 
-for bc, ns, nc, np, ne, nq, lt, dbc, kcr, sps, rds, bikkuri, dakeno, haikei, hiketsu, himitsu, houhou, housoku, naze, odoroki, riyuu, shinzitsu, shirarezaru, special, sugo, sugoi, suteki, tokubetsu, totteoki, tukurikata, uragawa, zittai in zip(bookmark_counts, nums_of_sentences, nums_of_comma, nums_of_period, nums_of_exclamation_mark, nums_of_question_mark, lengths_of_text, distances_btw_commas, kanji_content_rates, sentiment_polarity_scores, raising_discussion_scores, include_bikkuri_labels, include_dakeno_labels, include_haikei_labels, include_hiketsu_labels, include_himitsu_labels, include_houhou_labels, include_housoku_labels, include_naze_labels, include_odoroki_labels, include_riyuu_labels, include_shinzitsu_labels, include_shirarezaru_labels, include_special_labels, include_sugo_labels, include_sugoi_labels, include_suteki_labels, include_tokubetsu_labels, include_totteoki_labels, include_tukurikata_labels, include_uragawa_labels, include_zittai_labels):
+for bc, ns, nc, np, ne, nq, lt, dbc, kcr, sps, rds, bikkuri, dakeno, haikei, hiketsu, himitsu, houhou, housoku, naze, odoroki, riyuu, shinzitsu, shirarezaru, special, sugo, sugoi, suteki, tokubetsu, totteoki, tukurikata, uragawa, zittai, hs, ls in zip(bookmark_counts, nums_of_sentences, nums_of_comma, nums_of_period, nums_of_exclamation_mark, nums_of_question_mark, lengths_of_text, distances_btw_commas, kanji_content_rates, sentiment_polarity_scores, raising_discussion_scores, include_bikkuri_labels, include_dakeno_labels, include_haikei_labels, include_hiketsu_labels, include_himitsu_labels, include_houhou_labels, include_housoku_labels, include_naze_labels, include_odoroki_labels, include_riyuu_labels, include_shinzitsu_labels, include_shirarezaru_labels, include_special_labels, include_sugo_labels, include_sugoi_labels, include_suteki_labels, include_tokubetsu_labels, include_totteoki_labels, include_tukurikata_labels, include_uragawa_labels, include_zittai_labels, highest_similarities, lowest_similarities):
     all_data.append([
-        bc, ns, nc, np, ne, nq, lt, dbc, kcr, sps, rds, bikkuri, dakeno, haikei, hiketsu, himitsu, houhou, housoku, naze, odoroki, riyuu, shinzitsu, shirarezaru, special, sugo, sugoi, suteki, tokubetsu, totteoki, tukurikata, uragawa, zittai
+        bc, ns, nc, np, ne, nq, lt, dbc, kcr, sps, rds, bikkuri, dakeno, haikei, hiketsu, himitsu, houhou, housoku, naze, odoroki, riyuu, shinzitsu, shirarezaru, special, sugo, sugoi, suteki, tokubetsu, totteoki, tukurikata, uragawa, zittai, hs, ls
     ])
 
 df = pd.DataFrame(
@@ -157,7 +165,7 @@ df = pd.DataFrame(
         "kanji_content_rate",
         "sentiment_polarity_score",
         "raising_discussion_score",
-        "include_bikkuri_labels", "include_dakeno_labels", "include_haikei_labels", "include_hiketsu_labels", "include_himitsu_labels", "include_houhou_labels", "include_housoku_labels", "include_naze_labels", "include_odoroki_labels", "include_riyuu_labels", "include_shinzitsu_labels", "include_shirarezaru_labels", "include_special_labels", "include_sugo_labels", "include_sugoi_labels", "include_suteki_labels", "include_tokubetsu_labels", "include_totteoki_labels", "include_tukurikata_labels", "include_uragawa_labels", "include_zittai_labels", ],
+        "include_bikkuri_labels", "include_dakeno_labels", "include_haikei_labels", "include_hiketsu_labels", "include_himitsu_labels", "include_houhou_labels", "include_housoku_labels", "include_naze_labels", "include_odoroki_labels", "include_riyuu_labels", "include_shinzitsu_labels", "include_shirarezaru_labels", "include_special_labels", "include_sugo_labels", "include_sugoi_labels", "include_suteki_labels", "include_tokubetsu_labels", "include_totteoki_labels", "include_tukurikata_labels", "include_uragawa_labels", "include_zittai_labels", "highest_similarities", "lowest_similarities"],
     index=ids)
 
 print(df.corr())

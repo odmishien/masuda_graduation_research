@@ -3,7 +3,6 @@ from gensim.models import KeyedVectors
 import json
 import MeCab
 import itertools
-from tqdm import tqdm
 import os
 
 corpusdir = "./model/"
@@ -45,8 +44,8 @@ for i in tqdm(range(1, 4995)):
                         pass
                     node = node.next
             max_sim, min_sim = calc_highest_and_lowest_similarity(nouns)
-            masuda["highest_similarity"] = str(max_sim)
-            masuda["lowest_similarity"] = str(min_sim)
+            masuda["highest_similarity"] = float(max_sim)
+            masuda["lowest_similarity"] = float(min_sim)
             updated_masuda_objs.append(masuda)
         with open('./data/hot_entry/masuda_{0}.json'.format(i), 'w') as f:
             json.dump(updated_masuda_objs, f, indent=2, ensure_ascii=False)
@@ -69,8 +68,8 @@ for i in tqdm(range(2, 5001)):
                         pass
                     node = node.next
             max_sim, min_sim = calc_highest_and_lowest_similarity(nouns)
-            masuda["highest_similarity"] = str(max_sim)
-            masuda["lowest_similarity"] = str(min_sim)
+            masuda["highest_similarity"] = float(max_sim)
+            masuda["lowest_similarity"] = float(min_sim)
             updated_masuda_objs.append(masuda)
         with open('./data/entry/masuda_{0}.json'.format(i), 'w') as f:
             json.dump(updated_masuda_objs, f, indent=2, ensure_ascii=False)
