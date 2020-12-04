@@ -24,33 +24,36 @@ not_hot_concat_df = pd.concat(not_hot_concat)
 
 all_concat_df = pd.concat([hot_concat_df, not_hot_concat_df])
 
-all_concat_df.bookmark_counts = util.min_max(
-    all_concat_df.bookmark_counts.tolist())
-all_concat_df.nums_of_sentences = util.min_max(
-    all_concat_df.nums_of_sentences.tolist())
-all_concat_df.nums_of_comma = util.min_max(
-    all_concat_df.nums_of_comma.tolist())
-all_concat_df.nums_of_period = util.min_max(
-    all_concat_df.nums_of_period.tolist())
-all_concat_df.nums_of_exclamation_mark = util.min_max(
-    all_concat_df.nums_of_exclamation_mark.tolist())
-all_concat_df.nums_of_question_mark = util.min_max(
-    all_concat_df.nums_of_question_mark.tolist())
-all_concat_df.lengths_of_text = util.min_max(
-    all_concat_df.lengths_of_text.tolist())
-all_concat_df.distances_btw_commas = util.min_max(
-    all_concat_df.distances_btw_commas.tolist())
-all_concat_df.kanji_content_rates = util.min_max(
-    all_concat_df.kanji_content_rates.tolist())
-all_concat_df.sentiment_polarity_scores = util.min_max(
-    all_concat_df.sentiment_polarity_scores.tolist())
-all_concat_df.raising_discussion_scores = util.min_max(
-    all_concat_df.raising_discussion_scores.tolist())
-all_concat_df.highest_similarities = util.min_max(
-    all_concat_df.highest_similarities.tolist())
-all_concat_df.lowest_similarities = util.min_max(
-    all_concat_df.lowest_similarities.tolist())
+all_concat_df.bookmark_count = util.min_max(
+    all_concat_df.bookmark_count.tolist())
+all_concat_df.num_of_sentences = util.min_max(
+    all_concat_df.num_of_sentences.tolist())
+all_concat_df.num_of_comma = util.min_max(
+    all_concat_df.num_of_comma.tolist())
+all_concat_df.num_of_period = util.min_max(
+    all_concat_df.num_of_period.tolist())
+all_concat_df.num_of_exclamation_mark = util.min_max(
+    all_concat_df.num_of_exclamation_mark.tolist())
+all_concat_df.num_of_question_mark = util.min_max(
+    all_concat_df.num_of_question_mark.tolist())
+all_concat_df.length_of_text = util.min_max(
+    all_concat_df.length_of_text.tolist())
+all_concat_df.distance_btw_commas = util.min_max(
+    all_concat_df.distance_btw_commas.tolist())
+all_concat_df.kanji_content_rate = util.min_max(
+    all_concat_df.kanji_content_rate.tolist())
+# all_concat_df.sentiment_polarity_score = util.min_max(
+#     all_concat_df.sentiment_polarity_score.tolist())
+# all_concat_df.raising_discussion_score = util.min_max(
+#     all_concat_df.raising_discussion_score.tolist())
+# all_concat_df.highest_similarity = util.min_max(
+#     all_concat_df.highest_similarity.tolist())
+# all_concat_df.lowest_similarity = util.min_max(
+#     all_concat_df.lowest_similarity.tolist())
 
-print(all_concat_df.corr())
-seaborn.heatmap(all_concat_df.corr())
+show_columns = ["bookmark_count",
+                "num_of_sentences", "num_of_comma", "num_of_period", "num_of_exclamation_mark", "num_of_question_mark", "length_of_text", "distance_btw_commas", "kanji_content_rate"]
+
+print(all_concat_df[show_columns].corr())
+seaborn.heatmap(all_concat_df[show_columns].corr())
 plt.show()

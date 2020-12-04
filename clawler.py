@@ -5,8 +5,8 @@ import json
 import re
 import sys
 
-clawl_zero_bookmark = False
-clawl_hot_entry = True
+clawl_zero_bookmark = True
+clawl_hot_entry = False
 hot_entry_standard_min = 100
 hot_entry_standard_max = 200
 
@@ -47,7 +47,7 @@ def get_masuda_list(url):
         except:
             bookmark_num = 0
 
-        if clawl_zero_bookmark and bookmark_num == 0:
+        if not clawl_zero_bookmark and bookmark_num == 0:
             pass
         else:
             if clawl_hot_entry:
@@ -96,7 +96,7 @@ def dump_list_to_json(masuda_list, page):
 args = sys.argv
 page_from = int(args[1])
 page_to = int(args[2])
-for page in range(page_from, page_to, -1):
+for page in range(page_from, page_to):
     url = 'https://anond.hatelabo.jp/?mode=top&page=' + str(page)
     masuda_list = get_masuda_list(url)
     dump_list_to_json(masuda_list, page)
